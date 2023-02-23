@@ -1,0 +1,139 @@
+@import "../index.css";
+/* ### TopBar ### */
+.topBarContainer {
+  background: linear-gradient(
+    to bottom,
+    var(--secondary-color),
+    90%,
+    var(--main-color)
+  );
+  height: 15%;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+.Icon {
+  cursor: pointer;
+}
+.Close {
+  transform: rotate(45deg);
+}
+.list {
+  list-style-type: none;
+  text-align: center;
+}
+.topBarList {
+  display: none;
+}
+.topBarList li,
+.ResponsiveOpen li {
+  padding: 0.5em;
+  border-radius: 1em;
+  cursor: pointer;
+  transition: all ease-out 0.1s;
+  user-select: none;
+}
+.ResponsiveOpen li {
+  margin: 0.2em;
+}
+.topBarList li:first-child,
+.ResponsiveOpen li:first-child {
+  font-weight: 800;
+}
+.topBarList li:hover,
+.ResponsiveOpen li:hover {
+  background-color: var(--main-color);
+  box-shadow: 0 5px 5px var(--light-color-secondary);
+}
+
+.ResponsiveOpen {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0.5rem;
+  position: absolute;
+  right: 5%;
+  top: 70px;
+  background: var(--secondary-color);
+  transition: opacity 0.2s ease-out;
+}
+
+.ResponsiveClosed {
+  display: none;
+}
+
+/* ### MainScreen ### */
+.mainScreen {
+  height: 90%;
+  min-height: 400px;
+  margin: 10px;
+  border-radius: 40px;
+  border: 2px solid var(--secondary-color); 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.panel {
+  width: 100%;
+  height: 50%;
+}
+/* ### Keyboard ### */
+.keyboard {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.keyboardLine{
+ margin:5px 0;
+ display: flex;
+ flex-wrap: nowrap;
+}
+.keyboardKey {
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+  padding: 10px;
+  margin: 5px 1px;
+  width: 35px;
+  height: 50px; 
+  text-transform: uppercase;
+  border-radius: 10px;
+  transition: background-color 0.1s ease-in-out;
+}
+.keyboardKey:hover{
+background-color: var(--light-color-secondary)
+}
+/* ### Media Queries ### */
+
+@media screen and (width>800px) {
+  .Icon {
+    display: none;
+  }
+  .topBarList {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1em;
+  }
+  .mainScreen {
+    margin: 10px 40px;
+    flex-direction: row;
+  }
+  .panel {
+    width: 100%;
+    height: 50%;
+  }
+  .keyboardKey {
+    margin: 2px 2px;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+  }
+  .keyboardLine{
+    margin:0;
+   }
+}
