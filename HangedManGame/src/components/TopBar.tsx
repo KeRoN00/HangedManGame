@@ -1,11 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import styles from "./styles.module.css";
 import { FaBars, FaPlus } from "react-icons/fa";
+import { GameContext } from "../store/game-context";
 
 const TopBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const GameCtx = useContext(GameContext);
 
+
+  const StartTheGame = () => {
+    GameCtx?.toggleGameRunning(true);
+    setIsOpen(false)
+  };
   useEffect(() => {
     window.innerWidth < 800
       ? setIsMobile(true)
@@ -55,14 +63,13 @@ const TopBar: React.FC = () => {
         } ${styles.list}`}
       >
         <li
-          onClick={() => {
-            // START THE GAME
-          }}
+          onClick={() => StartTheGame()}
+          className={GameCtx?.isRunning ? styles.hidden : ""}
         >
           PLAY!
         </li>
         <li
-          onClick={() => {
+          onClick={() => {setShowModal(prev => !prev)
             // SHOW HOW TO PLAY MODAL
           }}
         >
