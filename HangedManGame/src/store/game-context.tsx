@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import {GameType, Round, Settings} from '../@types.game'
 
-
-
-
 export const GameContext = React.createContext<GameType | null>(null);
 
 export const GameContextProvider: React.FC<{children: React.ReactNode}> = (
@@ -39,7 +36,8 @@ const toggleNextRound = (newWord: string) => {
     changeDifficulty: changeDifficultyHandler,
     changeNumOfRounds: changeRoundsHandler,
     isRunning: isRunning,
-    nextRound: toggleNextRound
+    nextRound: toggleNextRound,
+    settings: settings
   }
 
   return (

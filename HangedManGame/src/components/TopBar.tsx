@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext, useCallback } from "react";
 import styles from "./styles.module.css";
 import { FaBars, FaPlus } from "react-icons/fa";
 import { GameContext } from "../store/game-context";
-
 const TopBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -12,8 +11,12 @@ const TopBar: React.FC = () => {
 
   const StartTheGame = () => {
     GameCtx?.toggleGameRunning(true);
-    setIsOpen(false)
+    setIsOpen(false);
+    setTimeout(()=> {
+    GameCtx?.toggleGameRunning(false);
+    }, 500)
   };
+
   useEffect(() => {
     window.innerWidth < 800
       ? setIsMobile(true)

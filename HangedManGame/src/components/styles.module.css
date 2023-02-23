@@ -110,6 +110,10 @@
 .keyboardKey:hover{
 background-color: var(--light-color-secondary)
 }
+.keyboardKey:disabled{
+  pointer-events: none;
+  background-color: var(--light-color-secondary);
+}
 /* ### Media Queries ### */
 
 @media screen and (width>800px) {
