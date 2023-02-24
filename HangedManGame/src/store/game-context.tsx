@@ -1,34 +1,32 @@
 import React, { useState } from "react";
-import {GameType, Round, Settings} from '../@types.game'
+import { GameType, initialGameSettings, Round, Settings } from "../@types.game";
 
-export const GameContext = React.createContext<GameType | null>(null);
+export const GameContext = React.createContext<GameType>(initialGameSettings);
 
-export const GameContextProvider: React.FC<{children: React.ReactNode}> = (
-  props
-) => {
-const [numOfRounds, setNumOfRounds] = useState<number>(3);
-const [settings, setSettings] = useState<Settings>({difficulty: 'easy', numOfRounds: numOfRounds});
-const [isRunning, setIsRunning] = useState<boolean>(false);
-const [round, setRound] = useState<Round>({word: ''});
+export const GameContextProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [numOfRounds, setNumOfRounds] = useState<number>(initialGameSettings.settings.numOfRounds);
+  const [settings, setSettings] = useState<Settings>(initialGameSettings.settings);
+  const [isRunning, setIsRunning] = useState<boolean>(initialGameSettings.isRunning);
+  const [round, setRound] = useState<Round>(initialGameSettings.round);
 
-const toggleGameRunningHandler = (isRunning: boolean) => {
-  setIsRunning(isRunning);
-  return isRunning;
-};
-const changeDifficultyHandler = (newDifficulty: string) => {
-  setSettings({difficulty: newDifficulty, numOfRounds}
-  );
-  return settings;
-};
-const changeRoundsHandler = (num: number) => {
-  if(num<3) return;
-  setNumOfRounds(num);
-  return numOfRounds;
-};
-const toggleNextRound = (newWord: string) => {
- setRound({word: newWord});
- return round;
-};
+  const toggleGameRunningHandler = (isRunning: boolean) => {
+    setIsRunning(isRunning);
+    return isRunning;
+  };
+  const changeDifficultyHandler = (newDifficulty: string) => {
+    setSettings({ difficulty: newDifficulty, numOfRounds });
+    return settings;
+  };
+  const changeRoundsHandler = (num: number) => {
+    setNumOfRounds(num);
+    return numOfRounds;
+  };
+  const toggleNextRound = (newWord: string) => {
+    setRound({word: newWord});
+    return round;
+  };
 
   const ContextValue = {
     round: round,
@@ -37,11 +35,11 @@ const toggleNextRound = (newWord: string) => {
     changeNumOfRounds: changeRoundsHandler,
     isRunning: isRunning,
     nextRound: toggleNextRound,
-    settings: settings
-  }
+    settings: settings,
+  };
 
   return (
-    <GameContext.Provider value={ContextValue}>{props.children}</GameContext.Provider>
+    <GameContext.Provider value={ContextValue}>{children}</GameContext.Provider>
   );
 };
 
