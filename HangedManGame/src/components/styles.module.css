@@ -108,7 +108,8 @@
   transition: background-color 0.1s ease-in-out;
 }
 .keyboardKey:hover{
-background-color: var(--light-color-secondary)
+background-color: var(--light-color-secondary);
+cursor: pointer;
 }
 .keyboardKey:disabled{
   pointer-events: none;

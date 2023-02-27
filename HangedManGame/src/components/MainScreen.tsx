@@ -1,25 +1,24 @@
-import React, { useState } from "react";
-import { useFetchData } from "../hooks/useFetchData";
+import React, { useEffect } from "react";
+import { useAppSelector } from "../hooks/storeHooks";
+
+import LeftPanel from "./LeftPanel";
 import styles from "./styles.module.css";
 
 const MainScreen: React.FC = () => {
-  const [randomWord, setRandomWord] = useState<string[]>(["start"]);
-  const [keyWord, setKeyWord] = useState<string[]>(['']);
-  const { data, fetchData } = useFetchData();
-  const fetchRandomWord = () => {
-    fetchData();
+  const keys = useAppSelector(state => state.keyboard.keys);
+
+  const goToNextRound =  () => {
+
   };
 
-  
   return (
     <div className={styles.mainScreen}>
-      <section className={`${styles.leftPanel} ${styles.panel}`}>
-      </section>
+      <LeftPanel />
       <section
-        onClick={() => fetchRandomWord()}
+        onClick={() => goToNextRound()}
         className={`${styles.rightPanel} ${styles.panel}`}
       >
-        {data}
+        Right panel
       </section>
     </div>
   );

@@ -1,18 +1,21 @@
-import './App.css'
-import Keyboard from './components/Keyboard'
-import MainScreen from './components/MainScreen'
-import TopBar from './components/TopBar'
+import "./App.css";
+import Keyboard from "./components/Keyboard";
+import MainScreen from "./components/MainScreen";
+import TopBar from "./components/TopBar";
+import { Provider } from "react-redux";
+import { store } from "./store/slices/store";
 
 function App() {
-  //TODO:  Create a basic layout ( word, hangedman image, keyboard, scoreboard, info, HowToPlay)
 
   return (
     <div className="App">
-      <TopBar/>
-      <MainScreen/>
-      <Keyboard />
+      <Provider store={store}>
+        <TopBar />
+        <MainScreen />
+        <Keyboard/>
+      </Provider>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

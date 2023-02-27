@@ -1,34 +1,33 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import { FaBars, FaPlus } from "react-icons/fa";
-import { GameContext } from "../store/game-context";
-const TopBar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const GameCtx = useContext(GameContext);
+import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
+import { toggleGameRunning } from "../store/slices/playthrough-slice";
 
+const TopBar: React.FC = () => {
+  const [isListOpen, setIsListOpen] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const isRunning = useAppSelector(state => state.playthrough.isRunning);
+  const dispatch = useAppDispatch();
+
+  const handleWindowResize = () => {
+    window.innerWidth < 800
+      ? setIsMobile(true)
+      : (setIsMobile(false), setIsListOpen(false));
+  };
 
   const StartTheGame = () => {
-    GameCtx?.toggleGameRunning(true);
-    setIsOpen(false);
-    setTimeout(()=> {
-    GameCtx?.toggleGameRunning(false);
-    }, 500)
+    dispatch(toggleGameRunning(true));
+    console.log(isRunning);
+    setIsListOpen(false);
   };
 
   useEffect(() => {
-    window.innerWidth < 800
-      ? setIsMobile(true)
-      : (setIsMobile(false), setIsOpen(false));
+    handleWindowResize();
   }, []);
 
   useEffect(() => {
-    const handleWindowResize = () => {
-      window.innerWidth < 800
-        ? setIsMobile(true)
-        : (setIsMobile(false), setIsOpen(false));
-    };
+    handleWindowResize();
     window.addEventListener("resize", handleWindowResize);
 
     return () => {
@@ -38,12 +37,12 @@ const TopBar: React.FC = () => {
   return (
     <div className={styles.topBarContainer}>
       <h1>HangedMan</h1>
-      {isOpen ? (
+      {isListOpen ? (
         <FaPlus
           className={`${styles.Close} ${styles.Icon}`}
           size={32}
           onClick={() => {
-            setIsOpen(false);
+            setIsListOpen(false);
           }}
         />
       ) : (
@@ -51,7 +50,7 @@ const TopBar: React.FC = () => {
           className={styles.Icon}
           size={32}
           onClick={() => {
-            setIsOpen(true);
+            setIsListOpen(true);
           }}
         />
       )}
@@ -59,7 +58,7 @@ const TopBar: React.FC = () => {
       <ul
         className={`${
           isMobile
-            ? isOpen
+            ? isListOpen
               ? styles.ResponsiveOpen
               : styles.ResponsiveClosed
             : styles.topBarList
@@ -67,12 +66,12 @@ const TopBar: React.FC = () => {
       >
         <li
           onClick={() => StartTheGame()}
-          className={GameCtx?.isRunning ? styles.hidden : ""}
+          className={isRunning ? styles.hidden : ""}
         >
           PLAY!
         </li>
         <li
-          onClick={() => {setShowModal(prev => !prev)
+          onClick={() => {
             // SHOW HOW TO PLAY MODAL
           }}
         >
@@ -80,10 +79,12 @@ const TopBar: React.FC = () => {
         </li>
         <li
           onClick={() => {
+            dispatch(toggleGameRunning(false));
             // SHOW INFO MODAL
           }}
         >
-          Info
+          {/* Info */}
+          end
         </li>
         <li
           onClick={() => {

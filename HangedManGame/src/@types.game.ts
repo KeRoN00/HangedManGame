@@ -1,29 +1,33 @@
 
-export type Settings = {
+interface Settings {
   difficulty: string;
   numOfRounds: number;
 }
-
-export interface Round {
+interface Playthrough {
+  isRunning: boolean
   word: string;
+}
+export const initialPlaythroughState: Playthrough =  {
+  isRunning: false,
+  word: '',
+
+}
+
+export const initialSettingsState: Settings = {
+    difficulty: 'easy',
+    numOfRounds: 3
+};
+
+interface keyBoardKeys {
+  keys: string[];
+}
+export const initialKeyBoardKeysState: keyBoardKeys = {
+  keys:[]
 }
 
 
-
-export type GameType = {
-  isRunning: boolean;
-  round: Round;
-  toggleGameRunning: (isRunning: boolean) => void;
-  changeDifficulty?: (settings: string) => void;
-  changeNumOfRounds?: (settings: number) => void;
-  nextRound: (newWord: string) => void;
-  settings: Settings
-};
-
-
 export type FetchResponse = {
-  data: any, 
+  data: string, 
   error: any,
-  status: string ,
-  fetchData: () => void,
+  fetchData: (difficulty: string) => void,
 }

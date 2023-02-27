@@ -1,12 +1,14 @@
+import styles from '../components/styles.module.css'
 
-export const ResetKeyboard = (s: string) => {
-        const buttons = document.getElementsByClassName(s)
+export const ResetKeyboard = () => {
+        const buttons = document.getElementsByClassName(styles.keyboardKey.toString())
         const buttonsArr = Array.from(buttons);
         buttonsArr.forEach(button => (button as HTMLButtonElement).removeAttribute('disabled'))
 }
-export const disableKey = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+export const DisableKey = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     (e.target as HTMLButtonElement).toggleAttribute('disabled');
   }
+
 
 
 // start only when isRunning = true
