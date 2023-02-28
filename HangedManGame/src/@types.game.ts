@@ -5,11 +5,19 @@ interface Settings {
 }
 interface Playthrough {
   isRunning: boolean
-  word: string;
+  fetchProperties: {
+    isLoading: boolean,
+    word: string,
+    error: string
+  }
 }
 export const initialPlaythroughState: Playthrough =  {
   isRunning: false,
-  word: '',
+  fetchProperties: {
+    isLoading: false,
+    word: '',
+    error: ''
+  }
 
 }
 

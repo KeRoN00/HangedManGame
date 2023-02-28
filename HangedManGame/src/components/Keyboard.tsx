@@ -7,14 +7,13 @@ import { addKeyToArray } from "../store/slices/keyboard-slice";
 
 const Keyboard: React.FC = () => {
   const dispatch = useAppDispatch();
-  const keys = useAppSelector(state => state.keyboard.keys);
-  const handleKeyClicked = ( e: React.MouseEvent<HTMLButtonElement, MouseEvent>, key: string ) => {
+  const handleKeyClicked = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    key: string
+  ) => {
     DisableKey(e);
     dispatch(addKeyToArray(key));
   };
-  useEffect(()=> {
-    console.log(keys)
-  }, [keys]);  
 
   return (
     <div className={styles.keyboard}>

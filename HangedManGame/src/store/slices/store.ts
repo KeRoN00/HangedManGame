@@ -7,8 +7,7 @@ export const store = configureStore({
     reducer: {
         keyboard: keyboardReducer,
         playthrough: playthroughReducer,
-        settings: settingsReducer,
-        
+        settings: settingsReducer,   
     }
 })
 

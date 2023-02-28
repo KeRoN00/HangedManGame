@@ -18,7 +18,6 @@ const TopBar: React.FC = () => {
 
   const StartTheGame = () => {
     dispatch(toggleGameRunning(true));
-    console.log(isRunning);
     setIsListOpen(false);
   };
 

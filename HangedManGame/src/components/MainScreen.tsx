@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
-import { useAppSelector } from "../hooks/storeHooks";
+import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
+import { setNewWord, fetchData } from "../store/slices/playthrough-slice";
 
 import LeftPanel from "./LeftPanel";
 import styles from "./styles.module.css";
 
 const MainScreen: React.FC = () => {
-  const keys = useAppSelector(state => state.keyboard.keys);
+ const dispatch = useAppDispatch();
+ const difficulty = useAppSelector(state => state.settings.difficulty);
 
-  const goToNextRound =  () => {
-
+  
+  const goToNextRound = () => {
+    dispatch(fetchData(difficulty));
   };
 
   return (
