@@ -51,10 +51,12 @@ export const playthroughSlice = createSlice({
     toggleGameRunning: (state, action: PayloadAction<boolean>) => {
       state.isRunning = action.payload;
     },
-    setNewWord: (state, action: PayloadAction<string>) => {
-      state.fetchProperties.word = action.payload;
-      console.log("saved data", state.fetchProperties.word);
+    incrementScore: (state) => {
+      state.score = state.score + 1;
     },
+    resetScore: (state) => {
+      state.score = 0;
+    }
   },
   extraReducers(builder) {
     builder
@@ -75,6 +77,6 @@ export const playthroughSlice = createSlice({
       });
   },
 });
-export const { toggleGameRunning, setNewWord } = playthroughSlice.actions;
+export const { toggleGameRunning, incrementScore, resetScore } = playthroughSlice.actions;
 
 export default playthroughSlice.reducer;

@@ -1,7 +1,8 @@
 
 interface Settings {
-  difficulty: string;
-  numOfRounds: number;
+  difficulty: string
+  numOfRounds: number
+  numOfMistakes: number
 }
 interface Playthrough {
   isRunning: boolean
@@ -10,6 +11,7 @@ interface Playthrough {
     word: string,
     error: string
   }
+  score: number
 }
 export const initialPlaythroughState: Playthrough =  {
   isRunning: false,
@@ -17,13 +19,15 @@ export const initialPlaythroughState: Playthrough =  {
     isLoading: false,
     word: '',
     error: ''
-  }
+  },
+  score:0 
 
 }
 
 export const initialSettingsState: Settings = {
     difficulty: 'easy',
-    numOfRounds: 3
+    numOfRounds: 3,
+    numOfMistakes: 10,
 };
 
 interface keyBoardKeys {
@@ -33,9 +37,3 @@ export const initialKeyBoardKeysState: keyBoardKeys = {
   keys:[]
 }
 
-
-export type FetchResponse = {
-  data: string, 
-  error: any,
-  fetchData: (difficulty: string) => void,
-}

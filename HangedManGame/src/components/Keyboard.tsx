@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./styles.module.css";
 import { keyboardKeys } from "../utils/keyboardKeys";
 import { DisableKey } from "../utils/gamePlayThrough";
-import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
+import { useAppDispatch } from "../hooks/storeHooks";
 import { addKeyToArray } from "../store/slices/keyboard-slice";
 
 const Keyboard: React.FC = () => {
