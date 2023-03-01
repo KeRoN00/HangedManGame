@@ -1,15 +1,17 @@
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
-import { toggleGameRunning } from "../store/slices/playthrough-slice";
+import { resetKeyArray } from "../store/slices/keyboard-slice";
+import {
+  resetMistakes,
+  resetScore,
+  toggleGameRunning,
+} from "../store/slices/playthrough-slice";
 
+export const EndTheGame = () => {
+  const dispatch = useAppDispatch();
 
-export const StartTheGame = () => {
-    const dispatch = useAppDispatch();
-    const {score, currentRound, mistakes} = useAppSelector(state => state.playthrough)
+  dispatch(resetMistakes());
+  dispatch(resetScore());
+  dispatch(resetKeyArray());
 
-    // reset currentRoundvalue, 
-    // reset mistakes, 
-    // reset score,
-    // 
-    
-    dispatch(toggleGameRunning(false));
-  };
+  dispatch(toggleGameRunning(false));
+};
