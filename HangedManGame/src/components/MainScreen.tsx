@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
 import { resetKeyArray } from "../store/slices/keyboard-slice";
 import { fetchData } from "../store/slices/playthrough-slice";
-import { ResetKeyboard } from "../utils/gamePlayThrough";
+import { ResetKeyboard } from "../utils/ResetKeyboard";
 
 import LeftPanel from "./LeftPanel";
 import styles from "./styles.module.css";

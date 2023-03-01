@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import keyboardReducer from "./keyboard-slice";
-import playthroughReducer from "./playthrough-slice";
-import settingsReducer from "./settings-slice";
+import keyboardReducer from "./slices/keyboard-slice";
+import playthroughReducer from "./slices/playthrough-slice";
+import settingsReducer from "./slices/settings-slice";
 
 export const store = configureStore({
     reducer: {

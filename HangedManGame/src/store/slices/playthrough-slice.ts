@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { initialPlaythroughState } from "../../@types.game";
+import { initialPlaythroughState } from "../../types/@types.playthrough";
 
 const API_KEY: string = import.meta.env.VITE_API_KEY;
 const HOST: string = import.meta.env.VITE_APP_API_HOST;

@@ -3,7 +3,7 @@ import Keyboard from "./components/Keyboard";
 import MainScreen from "./components/MainScreen";
 import TopBar from "./components/TopBar";
 import { Provider } from "react-redux";
-import { store } from "./store/slices/store";
+import { store } from "./store/store";
 
 function App() {
 

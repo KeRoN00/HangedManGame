@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import { initialKeyBoardKeysState } from '../../@types.game'
+import { initialKeyBoardKeysState } from '../../types/@types.playthrough'
 
 export const keyboardSlice = createSlice({
 name: 'keyboard', 

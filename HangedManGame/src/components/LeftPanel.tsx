@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
 import { resetKeyArray } from "../store/slices/keyboard-slice";
 import { fetchData, incrementScore } from "../store/slices/playthrough-slice";
-import { ResetKeyboard } from "../utils/gamePlayThrough";
+import { ResetKeyboard } from "../utils/ResetKeyboard";
 
 import styles from "./styles.module.css";
 
@@ -18,7 +18,7 @@ const LeftPanel: React.FC = () => {
 
   const splittedWord = word.split("");
 
-  let wordLength:number = splittedWord.length;
+  let wordLength: number = splittedWord.length;
 
   let typedAnswer: number = 0;
 
@@ -37,7 +37,6 @@ const LeftPanel: React.FC = () => {
       splittedWord.map((c) => keys.includes(c) && typedAnswer++);
       if (typedAnswer == wordLength && wordLength > 0) {
         triggerNextRound(true);
-        
       }
     } else {
       setMistakes((mistakes) => mistakes + 1);
@@ -49,10 +48,15 @@ const LeftPanel: React.FC = () => {
   }, [keys]);
   return (
     <section className={styles.panel}>
-      {word.length > 0 ? (<div>{splittedWord.map((c, idx) => (
-        <span key={idx}> {keys.includes(c) ? c : "_"} </span>
-      ))}</div>) : <p>Waiting for start</p>}
- 
+      {word.length > 0 ? (
+        <div>
+          {splittedWord.map((c, idx) => (
+            <span key={idx}> {keys.includes(c) ? c : "_"} </span>
+          ))}
+        </div>
+      ) : (
+        <p>Waiting for start</p>
+      )}
     </section>
   );
 };
