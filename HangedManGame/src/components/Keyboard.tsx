@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./styles.module.css";
-import { keyboardKeys } from "./data/keyboardKeys";
+import { keyboardKeys } from "../data/keyboardKeys";
 import { DisableKey } from "../utils/DisableKey";
 import { useAppDispatch } from "../hooks/storeHooks";
 import { addKeyToArray } from "../store/slices/keyboard-slice";

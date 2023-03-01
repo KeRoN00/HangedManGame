@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
 import { resetKeyArray } from "../store/slices/keyboard-slice";
-import { fetchData, incrementScore } from "../store/slices/playthrough-slice";
+import { incrementScore } from "../store/slices/playthrough-slice";
 import { ResetKeyboard } from "../utils/ResetKeyboard";
-
+import { useFetchData } from "../hooks/useFetchData";
 import styles from "./styles.module.css";
 
 const LeftPanel: React.FC = () => {
-  const [mistakes, setMistakes] = useState<number>(1);
+  const [mistakes, setMistakes] = useState<number>(0);
   const dispatch = useAppDispatch();
 
   const { word } = useAppSelector((state) => state.playthrough.fetchProperties);
@@ -16,9 +16,9 @@ const LeftPanel: React.FC = () => {
     (state) => state.settings
   );
 
-  const splittedWord = word.split("");
+  const splittedWordArray = word.split("");
 
-  let wordLength: number = splittedWord.length;
+  let wordLength: number = splittedWordArray.length;
 
   let typedAnswer: number = 0;
 
@@ -27,30 +27,31 @@ const LeftPanel: React.FC = () => {
   const triggerNextRound = (success?: boolean) => {
     dispatch(resetKeyArray());
     ResetKeyboard();
-    setMistakes(1);
-    dispatch(fetchData(difficulty));
+    setMistakes(0);
+    dispatch(useFetchData(difficulty));
     success && dispatch(incrementScore());
   };
 
   useEffect(() => {
     if (word.includes(keyToCheck)) {
-      splittedWord.map((c) => keys.includes(c) && typedAnswer++);
+      splittedWordArray.map((c) => keys.includes(c) && typedAnswer++);
       if (typedAnswer == wordLength && wordLength > 0) {
         triggerNextRound(true);
       }
     } else {
       setMistakes((mistakes) => mistakes + 1);
       console.log("mistakes:", mistakes);
-      if (mistakes == numOfMistakes) {
+      if (mistakes == numOfMistakes - 1) {
         triggerNextRound();
       }
     }
   }, [keys]);
+
   return (
     <section className={styles.panel}>
       {word.length > 0 ? (
         <div>
-          {splittedWord.map((c, idx) => (
+          {splittedWordArray.map((c, idx) => (
             <span key={idx}> {keys.includes(c) ? c : "_"} </span>
           ))}
         </div>

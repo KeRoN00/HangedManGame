@@ -3,22 +3,26 @@ import styles from "./styles.module.css";
 import { FaBars, FaPlus } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
 import { toggleGameRunning } from "../store/slices/playthrough-slice";
+import { useFetchData } from "../hooks/useFetchData";
 
 const TopBar: React.FC = () => {
+  
   const [isListOpen, setIsListOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const isRunning = useAppSelector(state => state.playthrough.isRunning);
+  const isRunning = useAppSelector((state) => state.playthrough.isRunning);
+  const {difficulty} = useAppSelector((state)=> state.settings)
   const dispatch = useAppDispatch();
-
-  const handleWindowResize = () => {
-    window.innerWidth < 800
-      ? setIsMobile(true)
-      : (setIsMobile(false), setIsListOpen(false));
-  };
 
   const StartTheGame = () => {
     dispatch(toggleGameRunning(true));
     setIsListOpen(false);
+    dispatch(useFetchData(difficulty));
+  };
+  
+  const handleWindowResize = () => {
+    window.innerWidth < 800
+      ? setIsMobile(true)
+      : (setIsMobile(false), setIsListOpen(false));
   };
 
   useEffect(() => {
@@ -28,11 +32,11 @@ const TopBar: React.FC = () => {
   useEffect(() => {
     handleWindowResize();
     window.addEventListener("resize", handleWindowResize);
-
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };
   });
+
   return (
     <div className={styles.topBarContainer}>
       <h1>HangedMan</h1>

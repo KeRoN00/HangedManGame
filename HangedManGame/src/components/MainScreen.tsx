@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
 import { resetKeyArray } from "../store/slices/keyboard-slice";
-import { fetchData } from "../store/slices/playthrough-slice";
 import { ResetKeyboard } from "../utils/ResetKeyboard";
-
+import { useFetchData } from "../hooks/useFetchData";
 import LeftPanel from "./LeftPanel";
 import styles from "./styles.module.css";
 
@@ -15,7 +14,7 @@ const MainScreen: React.FC = () => {
   const goToNextRound = () => {
     dispatch(resetKeyArray());
     ResetKeyboard();
-    dispatch(fetchData(difficulty));
+    dispatch(useFetchData(difficulty));
   };
 
   return (

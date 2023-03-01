@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { initialSettingsState } from "../../types/@types.playthrough";
+import { initialSettingsState } from "../../types/@types.settings";
 
 export const settingsSlice = createSlice({
   name: "settings",

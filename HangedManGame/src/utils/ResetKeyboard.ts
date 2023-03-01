@@ -5,9 +5,6 @@ export const ResetKeyboard = () => {
         const buttonsArr = Array.from(buttons);
         buttonsArr.forEach(button => (button as HTMLButtonElement).removeAttribute('disabled'))
 }
-export const DisableKey = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    (e.target as HTMLButtonElement).toggleAttribute('disabled');
-  }
 
 
 
