@@ -1,9 +1,22 @@
 import React from "react";
 import styles from "./styles.module.css";
 import { keyboardKeys } from "../data/keyboardKeys";
-import {handleKeyPressed} from "../utils/handleKeyPressed"
+import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
+import { DisableKey } from "../utils/DisableKey";
+import { addKeyToArray } from "../store/slices/keyboard-slice";
 
 const Keyboard: React.FC = () => {
+const dispatch = useAppDispatch();
+const {isRunning} = useAppSelector((state) => state.playthrough)
+
+  const handleKeyPressed = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    key: string
+  ) => {
+    if(!isRunning) return;
+    DisableKey(e);
+    dispatch(addKeyToArray(key));
+  };
 
   return (
     <div className={styles.keyboard}>

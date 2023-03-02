@@ -36,14 +36,14 @@ export const playthroughSlice = createSlice({
         state.fetchProperties.isLoading = true;
       })
       .addCase(useFetchData.fulfilled, (state, action) => {
-        state.fetchProperties.isLoading = false;
         state.fetchProperties.word = action.payload;
+        state.fetchProperties.isLoading = false;
         state.fetchProperties.error = "";
         console.log("Saved data", action.payload);
       })
       .addCase(useFetchData.rejected, (state, action) => {
-        state.fetchProperties.isLoading = false;
         state.fetchProperties.word = "";
+        state.fetchProperties.isLoading = false;
         state.fetchProperties.error =
           action.error.message || "Something went wrong...";
       });
