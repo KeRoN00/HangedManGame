@@ -24,6 +24,11 @@ export const playthroughSlice = createSlice({
     resetMistakes: (state) => {
       state.mistakes = 0;
     },
+    endTheGame: (state) => {
+      state.mistakes = 0;
+      state.score = 0;
+      state.isRunning = false;
+    }
   },
   extraReducers(builder) {
     builder
@@ -51,6 +56,7 @@ export const {
   goToNextRound,
   incrementMistakes,
   resetMistakes,
+  endTheGame,
 } = playthroughSlice.actions;
 
 export default playthroughSlice.reducer;
