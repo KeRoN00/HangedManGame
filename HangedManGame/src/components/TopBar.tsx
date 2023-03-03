@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import { FaBars, FaPlus } from "react-icons/fa";
-import { useAppSelector } from "../hooks/storeHooks";
 
 import TopBarList from "./TopBarList";
 
 const TopBar: React.FC = () => {
   const [isListOpen, setIsListOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
-
-  
 
   const handleWindowResize = () => {
     window.innerWidth < 800
@@ -49,8 +46,11 @@ const TopBar: React.FC = () => {
           }}
         />
       )}
-      <TopBarList  isMobile={isMobile} isListOpen={isListOpen} setIsListOpen={setIsListOpen}/>
-      
+      <TopBarList
+        isMobile={isMobile}
+        isListOpen={isListOpen}
+        setIsListOpen={setIsListOpen}
+      />
     </div>
   );
 };

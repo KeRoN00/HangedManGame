@@ -3,12 +3,14 @@ import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
 import { useFetchData } from "../hooks/useFetchData";
 import { resetKeyArray } from "../store/slices/keyboard-slice";
 import {
+  goToNextRound,
   incrementMistakes,
   incrementScore,
   resetMistakes,
 } from "../store/slices/playthrough-slice";
 import { ResetKeyboard } from "../utils/ResetKeyboard";
 import styles from "./styles.module.css";
+import { WordPanel } from "./WordPanel";
 
 const LeftPanel: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -34,6 +36,7 @@ const LeftPanel: React.FC = () => {
     dispatch(resetKeyArray());
     ResetKeyboard();
     dispatch(resetMistakes());
+    dispatch(goToNextRound());
     dispatch(useFetchData(difficulty));
   };
 
@@ -55,7 +58,7 @@ const LeftPanel: React.FC = () => {
   return (
     <section className={styles.panel}>
       {isRunning ? (
-        <GamePanel
+        <WordPanel
           isLoading={isLoading}
           splittedWordArray={splittedWordArray}
           keys={keys}
@@ -67,29 +70,8 @@ const LeftPanel: React.FC = () => {
   );
 };
 
-interface GamePanelProps extends React.HTMLAttributes<HTMLDivElement> {
-  isLoading: boolean;
-  splittedWordArray: string[];
-  keys: string[];
-}
 
-const GamePanel: React.FunctionComponent<GamePanelProps> = (
-  props: GamePanelProps
-) => {
-  const { isLoading, splittedWordArray, keys } = props;
-  return (
-    <div>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <div>
-          {splittedWordArray.map((c, idx) => (
-            <span key={idx}> {keys.includes(c) ? c : "_"} </span>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
+
+
 
 export default LeftPanel;
