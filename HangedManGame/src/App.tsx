@@ -2,18 +2,20 @@ import "./App.css";
 import Keyboard from "./components/Keyboard";
 import MainScreen from "./components/MainScreen";
 import TopBar from "./components/TopBar";
-import { Provider } from "react-redux";
-import { store } from "./store/store";
+import Modal from "./components/Modal";
+import { useAppSelector } from "./hooks/storeHooks";
 
 function App() {
+  const {isModalOpen, content} = useAppSelector((state) => state.modal)
+
+  console.log(isModalOpen);
 
   return (
     <div className="App">
-      <Provider store={store}>
+       {isModalOpen && <Modal modalOption={content} />}
         <TopBar />
         <MainScreen />
         <Keyboard/>
-      </Provider>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
 import { useFetchData } from "../hooks/useFetchData";
 import { resetKeyArray } from "../store/slices/keyboard-slice";
+import { openModal } from "../store/slices/modal-slice";
 import {
   endTheGame,
   toggleGameRunning,
@@ -14,6 +15,8 @@ interface TopBarListProps extends React.HTMLAttributes<HTMLUListElement> {
   isListOpen: boolean;
   setIsListOpen: (value: boolean) => void;
 }
+
+//TODO: Create ListItem component with props that will trigger the modals for settings and 'how to play'
 
 const TopBarList: React.FunctionComponent<TopBarListProps> = (
   props: TopBarListProps
@@ -52,7 +55,7 @@ const TopBarList: React.FunctionComponent<TopBarListProps> = (
       </li>
       <li
         onClick={() => {
-          // SHOW HOW TO PLAY MODAL
+          dispatch(openModal('howToPlay'));
         }}
       >
         How To Play
