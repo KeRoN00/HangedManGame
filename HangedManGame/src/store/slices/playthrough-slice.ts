@@ -27,6 +27,7 @@ export const playthroughSlice = createSlice({
     endTheGame: (state) => {
       state.mistakes = 0;
       state.score = 0;
+      state.currentRound = 0;
       state.isRunning = false;
     }
   },

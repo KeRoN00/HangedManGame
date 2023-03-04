@@ -28,10 +28,9 @@ export const useFetchData = createAsyncThunk(
       default:
         wordLength = 5;
     }
-
     try {
       const response = await fetch(
-        `https://random-word-api.p.rapidapi.com/L/${wordLength}`,
+        `https://${HOST}/L/${wordLength}`,
         options
       );
       const res = await response.json();
