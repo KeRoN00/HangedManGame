@@ -8,8 +8,6 @@ import { useAppSelector } from "./hooks/storeHooks";
 function App() {
   const {isModalOpen, content} = useAppSelector((state) => state.modal)
 
-  console.log(isModalOpen);
-
   return (
     <div className="App">
        {isModalOpen && <Modal modalOption={content} />}

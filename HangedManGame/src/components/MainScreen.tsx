@@ -19,7 +19,6 @@ const MainScreen: React.FC = () => {
 
   return (
     <div className={styles.mainScreen}>
-      {score} / {numOfRounds}
       <LeftPanel />
       <section
         className={`${styles.rightPanel} ${styles.panel}`}

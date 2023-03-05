@@ -15,11 +15,12 @@ import { WordPanel } from "./WordPanel";
 const LeftPanel: React.FC = () => {
   const dispatch = useAppDispatch();
   const { keys } = useAppSelector((state) => state.keyboard);
+  const { score } = useAppSelector((state) => state.playthrough);
   const { mistakes, isRunning } = useAppSelector((state) => state.playthrough);
   const { word, isLoading } = useAppSelector(
     (state) => state.playthrough.fetchProperties
   );
-  const { numOfMistakes, difficulty } = useAppSelector(
+  const { numOfMistakes, difficulty, numOfRounds } = useAppSelector(
     (state) => state.settings
   );
 
@@ -48,7 +49,6 @@ const LeftPanel: React.FC = () => {
       }
     } else {
       dispatch(incrementMistakes());
-      console.log("mistakes:", mistakes);
       if (mistakes == numOfMistakes - 1) {
         goToNextRoundHandler();
       }
@@ -56,13 +56,16 @@ const LeftPanel: React.FC = () => {
   }, [keys]);
 
   return (
-    <section className={styles.panel}>
+    <section className={styles.panelLeft}>
       {isRunning ? (
+        <>
+        <h2 className={styles.score}>Score: {score} / {numOfRounds}</h2>
         <WordPanel
           isLoading={isLoading}
           splittedWordArray={splittedWordArray}
           keys={keys}
-        />
+          />
+          </>     
       ) : (
         <p>Start the game</p>
       )}

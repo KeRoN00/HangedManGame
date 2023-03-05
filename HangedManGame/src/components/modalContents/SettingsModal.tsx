@@ -1,26 +1,20 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { CgClose } from 'react-icons/cg'
 import { BsQuestion } from 'react-icons/bs'
 import { useAppDispatch, useAppSelector } from '../../hooks/storeHooks'
 import { changeContent, closeModal } from '../../store/slices/modal-slice'
 import styles from '../styles.module.css'
 import { setDifficulty, setNumberOfRounds } from '../../store/slices/settings-slice'
+
 const SettingsModal: React.FC = () => {
   const dispatch = useAppDispatch();
-  const {difficulty, numOfRounds, numOfMistakes} = useAppSelector((state)=> state.settings)
-  
-  useEffect(() => {
-    console.log(difficulty);
-    console.log(numOfRounds);
-    console.log(numOfMistakes);
-  }, [difficulty, numOfRounds]);
+  const {difficulty, numOfRounds } = useAppSelector((state)=> state.settings)
+ 
   
   const changeNumberOfRounds = (e: React.ChangeEvent<HTMLInputElement>) => {
     const numberOfRounds:number = parseInt(e.currentTarget.value);
     if(numberOfRounds < 3 || numberOfRounds > 20 || !numberOfRounds) return;
-    
     dispatch(setNumberOfRounds(numberOfRounds));
-    
   }
 
   return (
