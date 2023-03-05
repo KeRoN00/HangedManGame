@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
-import { endTheGame } from "../store/slices/playthrough-slice";
+import { openModal } from "../store/slices/modal-slice";
 import LeftPanel from "./LeftPanel";
 import styles from "./styles.module.css";
 
@@ -13,10 +13,7 @@ const MainScreen: React.FC = () => {
 
   useEffect(()=> {
     if(currentRound == numOfRounds) {
-
-      //TODO: Before ending the game show modal with score
-
-      dispatch(endTheGame());
+      dispatch(openModal('endingScore'));
     }
   }, [currentRound])
 

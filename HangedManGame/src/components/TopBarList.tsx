@@ -1,13 +1,8 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
 import { useFetchData } from "../hooks/useFetchData";
-import { resetKeyArray } from "../store/slices/keyboard-slice";
 import { openModal } from "../store/slices/modal-slice";
-import {
-  endTheGame,
-  toggleGameRunning,
-} from "../store/slices/playthrough-slice";
-import { ResetKeyboard } from "../utils/ResetKeyboard";
+import { toggleGameRunning } from "../store/slices/playthrough-slice";
 import styles from "./styles.module.css";
 
 interface TopBarListProps extends React.HTMLAttributes<HTMLUListElement> {
@@ -32,11 +27,6 @@ const TopBarList: React.FunctionComponent<TopBarListProps> = (
     dispatch(useFetchData(difficulty));
   };
 
-  const EndGame = () => {
-    dispatch(resetKeyArray());
-    ResetKeyboard();
-    dispatch(endTheGame());
-  };
   return (
     <ul
       className={`${
@@ -55,18 +45,19 @@ const TopBarList: React.FunctionComponent<TopBarListProps> = (
       </li>
       <li
         onClick={() => {
-          dispatch(openModal('howToPlay'));
+          dispatch(openModal("howToPlay"));
         }}
       >
         How To Play
       </li>
-      <li onClick={() => EndGame()}>
+      <li onClick={() => {}}>
         {/* Info */}
-        end
+        Info
       </li>
       <li
+        className={isRunning ? styles.hidden : ""}
         onClick={() => {
-          // SHOW SETTINGS MODAL
+          dispatch(openModal("settings"));
         }}
       >
         Settings

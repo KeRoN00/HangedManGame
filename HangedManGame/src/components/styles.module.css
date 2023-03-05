@@ -116,7 +116,7 @@ cursor: pointer;
   background-color: var(--light-color-secondary);
 }
 
-/* ### Overlay ### */
+/* ### Modals ### */
 .overlay {
   position: absolute;
   z-index: 10;
@@ -135,6 +135,7 @@ cursor: pointer;
   background-color: var(--main-color);
   border-radius: 40px;
   position:relative;
+  
 }
 .modalHeading {
   display: flex;
@@ -142,11 +143,29 @@ cursor: pointer;
   justify-content: space-between;
   padding-inline: 20px;
 }
+.difficultyHeading {
+  font-style: italic;
+  color:burlywood;
+  text-decoration: underline;
+  margin-left: 30px;
+}
+.modalContent {
+  padding: 0 30px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  text-align: left;
+  height: 80%;
+  overflow-y: auto;
+}
 .modalButton {
   width: 40px;
   height:40px;
-  margin-left: 20px;
+ 
   transition: transform 0.1s linear;
+}
+.modalButton:last-child {
+  margin-left: 20px;
 }
 .modalButton:hover {
 transform: scale(1.1);

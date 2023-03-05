@@ -20,10 +20,10 @@ export const useFetchData = createAsyncThunk(
         wordLength = 5;
         break;
       case "medium":
-        wordLength = 7;
+        wordLength = 8;
         break;
       case "hard":
-        wordLength = 9;
+        wordLength = 11;
         break;
       default:
         wordLength = 5;
