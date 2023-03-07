@@ -27,9 +27,9 @@ const HowToPlayModal: React.FC = () => {
       <div className={styles.modalContent}>
         <div>
         <p>
-          The object of HangedMan is to guess the secred words before the stick
-          figure is hung. The game consists in guessing the hidden words by
-          clicking on the letters on the keyboard.
+          The object of HangedMan is to guess hidden words before the stick
+          figure is hung. The game consists in guessing the words by
+          clicking on the letters on keyboard.
         </p>
         <p>The game is divided into rounds (min 3 - max 20). Each round is a different word to guess.</p>
         <h3>The game has three difficulty levels:</h3>

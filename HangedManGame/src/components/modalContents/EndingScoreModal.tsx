@@ -10,6 +10,8 @@ import {
   toggleGameRunning,
 } from "../../store/slices/playthrough-slice";
 
+// TODO: Style this component with displayed score
+
 const EndingScoreModal: React.FC = () => {
   const dispatch = useAppDispatch();
   const { score } = useAppSelector((state) => state.playthrough);

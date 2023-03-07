@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { CgClose } from 'react-icons/cg'
 import { BsQuestion } from 'react-icons/bs'
 import { useAppDispatch, useAppSelector } from '../../hooks/storeHooks'
@@ -9,12 +9,19 @@ import { setDifficulty, setNumberOfRounds } from '../../store/slices/settings-sl
 const SettingsModal: React.FC = () => {
   const dispatch = useAppDispatch();
   const {difficulty, numOfRounds } = useAppSelector((state)=> state.settings)
- 
+  const [error, setError] = useState<boolean>(false);
   
   const changeNumberOfRounds = (e: React.ChangeEvent<HTMLInputElement>) => {
     const numberOfRounds:number = parseInt(e.currentTarget.value);
-    if(numberOfRounds < 3 || numberOfRounds > 20 || !numberOfRounds) return;
-    dispatch(setNumberOfRounds(numberOfRounds));
+    const inputElement = document.getElementById('numOfRounds') as HTMLInputElement;
+    if(numberOfRounds < 3 || numberOfRounds > 20 || isNaN(numberOfRounds)) {
+      if(inputElement.value.trim().length == 0) return;
+      setError(true);
+      return;
+    } else {
+      dispatch(setNumberOfRounds(numberOfRounds));
+      setError(false);
+    }
   }
 
   return (
@@ -31,15 +38,16 @@ const SettingsModal: React.FC = () => {
         />
         </div>
       </div>
-      <div className={styles.modalContent}>
-        Change Difficulty: 
-        <select defaultValue={difficulty} onChange={(e) => dispatch(setDifficulty(e.target.value))}>
+      <div>
+        <h3>Change Difficulty:</h3> 
+        <select className={styles.settingsInput} defaultValue={difficulty} onChange={(e) => dispatch(setDifficulty(e.target.value))}>
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
         </select>
-        Select number of rounds: 
-        <input defaultValue={numOfRounds} type='number' max={20} min={3} onChange={(e)=> changeNumberOfRounds(e)}/>
+        <h3>Select number of rounds:</h3> 
+        <input id="numOfRounds" className={styles.settingsInput} defaultValue={numOfRounds} placeholder="choose from 3 to 20" type='text'  onChange={(e)=> changeNumberOfRounds(e)}/>
+        {error && <div style={{color: 'red'}}>Choose between 3 and 20!</div>}
       </div>
     </div>
   )

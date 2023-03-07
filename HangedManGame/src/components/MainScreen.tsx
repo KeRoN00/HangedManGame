@@ -4,10 +4,12 @@ import { openModal } from "../store/slices/modal-slice";
 import LeftPanel from "./LeftPanel";
 import styles from "./styles.module.css";
 
+// TODO: add LeftPanel with Graphics andWelcomePanel when the game is notRunning
+
 const MainScreen: React.FC = () => {
 
   const dispatch = useAppDispatch();
-  const {currentRound, isRunning, score} = useAppSelector((state)=> state.playthrough);
+  const {currentRound, isRunning} = useAppSelector((state)=> state.playthrough);
   const {numOfRounds} = useAppSelector((state)=> state.settings);
   
 

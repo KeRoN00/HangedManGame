@@ -7,16 +7,20 @@ import {
   incrementMistakes,
   incrementScore,
   resetMistakes,
+  toggleGameRunning,
 } from "../store/slices/playthrough-slice";
 import { ResetKeyboard } from "../utils/ResetKeyboard";
 import styles from "./styles.module.css";
 import { WordPanel } from "./WordPanel";
 
+//TODO: Remove conditional rendering when the welcome panel is made
+
 const LeftPanel: React.FC = () => {
   const dispatch = useAppDispatch();
   const { keys } = useAppSelector((state) => state.keyboard);
-  const { score } = useAppSelector((state) => state.playthrough);
-  const { mistakes, isRunning } = useAppSelector((state) => state.playthrough);
+  const { mistakes, isRunning, score, currentRound } = useAppSelector(
+    (state) => state.playthrough
+  );
   const { word, isLoading } = useAppSelector(
     (state) => state.playthrough.fetchProperties
   );
@@ -34,12 +38,21 @@ const LeftPanel: React.FC = () => {
 
   const goToNextRoundHandler = (success?: boolean) => {
     success && dispatch(incrementScore());
-    dispatch(resetKeyArray());
-    ResetKeyboard();
-    dispatch(resetMistakes());
-    dispatch(goToNextRound());
-    dispatch(useFetchData(difficulty));
+    setTimeout(() => {
+      dispatch(goToNextRound());
+      dispatch(resetKeyArray());
+      ResetKeyboard();
+      dispatch(resetMistakes());
+      if (currentRound == numOfRounds-1) return;
+      dispatch(useFetchData(difficulty));
+    }, 500);
   };
+
+ 
+    const StartGame = () => {
+      dispatch(toggleGameRunning(true));
+      dispatch(useFetchData(difficulty));
+    };
 
   useEffect(() => {
     if (word.includes(keyToCheck)) {
@@ -59,22 +72,22 @@ const LeftPanel: React.FC = () => {
     <section className={styles.panelLeft}>
       {isRunning ? (
         <>
-        <h2 className={styles.score}>Score: {score} / {numOfRounds}</h2>
-        <WordPanel
-          isLoading={isLoading}
-          splittedWordArray={splittedWordArray}
-          keys={keys}
+          <h2 className={styles.score}>
+            Score: {score} / {numOfRounds}
+          </h2>
+          <WordPanel
+            isLoading={isLoading}
+            splittedWordArray={splittedWordArray}
+            keys={keys}
           />
-          </>     
+        </>
       ) : (
-        <p>Start the game</p>
+        <button onClick={()=> {
+          StartGame();
+        }}>Start the game</button>
       )}
     </section>
   );
 };
-
-
-
-
 
 export default LeftPanel;
