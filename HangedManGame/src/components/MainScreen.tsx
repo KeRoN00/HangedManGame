@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
 import { openModal } from "../store/slices/modal-slice";
 import LeftPanel from "./LeftPanel";
+import RightPanel from "./RightPanel";
 import styles from "./styles.module.css";
 
 // TODO: add LeftPanel with Graphics andWelcomePanel when the game is notRunning
@@ -21,12 +22,15 @@ const MainScreen: React.FC = () => {
 
   return (
     <div className={styles.mainScreen}>
-      <LeftPanel />
-      <section
-        className={`${styles.rightPanel} ${styles.panel}`}
-      >
-        {isRunning ? <div>Round: {currentRound+1} of {numOfRounds}</div> : <h3>HANGED MAN WIDGET</h3>}
-      </section>
+      {isRunning ? <>
+        <LeftPanel />
+        <RightPanel /> 
+      </> :
+      <p>start</p>
+      }
+
+      
+     
     </div>
   );
 };

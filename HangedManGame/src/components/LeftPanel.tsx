@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
 import { useFetchData } from "../hooks/useFetchData";
 import { resetKeyArray } from "../store/slices/keyboard-slice";
@@ -80,6 +80,7 @@ const LeftPanel: React.FC = () => {
             splittedWordArray={splittedWordArray}
             keys={keys}
           />
+          {isRunning && <h2 className={styles.roundPanel}>Round: {currentRound+1} / {numOfRounds}</h2>}
         </>
       ) : (
         <button onClick={()=> {

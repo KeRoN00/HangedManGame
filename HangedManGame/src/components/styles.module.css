@@ -56,7 +56,7 @@
   position: absolute;
   right: 5%;
   top: 70px;
-  z-index:1;
+  z-index: 1;
   border: 2px solid var(--light-color-secondary);
   border-radius: 10px;
   background: var(--secondary-color);
@@ -67,27 +67,31 @@
   display: none;
 }
 
-.hidden { display: none; }
+.hidden {
+  display: none;
+}
 
 /* ### MainScreen ### */
+
 .mainScreen {
-  height: 100%;
-  min-height: 400px;
   margin: 10px;
-  border-radius: 40px;
-  border: 2px solid var(--secondary-color); 
-  display: flex;
   flex-direction: column;
+  border-radius: 40px;
+  display: flex;
+  border: 2px solid var(--secondary-color);
+  min-height: 400px;
+  height: 100%;
 }
 .panelLeft {
   width: 100%;
   height: 100%;
-  min-height:200px;
+  min-height: 100px;
   display: flex;
-  position:relative;
+  position: relative;
   align-items: center;
   justify-content: center;
 }
+
 .score {
   padding: 0;
   margin: 0;
@@ -99,10 +103,16 @@
   width: 100%;
   height: 100%;
 }
-.panelLeftWord{
-  font-size: 42px;
+.panelLeftWord {
+  font-size: 26px;
+  position: absolute;
+  top: 60px;
 }
-
+.roundPanel {
+  position: absolute;
+  top: 0px;
+  right: 30px;
+}
 /* ### Keyboard ### */
 .keyboard {
   width: 100%;
@@ -111,10 +121,10 @@
   justify-content: center;
   flex-direction: column;
 }
-.keyboardLine{
- margin:5px 0;
- display: flex;
- flex-wrap: nowrap;
+.keyboardLine {
+  margin: 5px 0;
+  display: flex;
+  flex-wrap: nowrap;
 }
 .keyboardKey {
   background-color: transparent;
@@ -123,16 +133,16 @@
   padding: 10px;
   margin: 5px 1px;
   width: 35px;
-  height: 50px; 
+  height: 50px;
   text-transform: uppercase;
   border-radius: 10px;
   transition: background-color 0.1s ease-in-out;
 }
-.keyboardKey:hover{
-background-color: var(--light-color-secondary);
-cursor: pointer;
+.keyboardKey:hover {
+  background-color: var(--light-color-secondary);
+  cursor: pointer;
 }
-.keyboardKey:disabled{
+.keyboardKey:disabled {
   pointer-events: none;
   background-color: var(--light-color-secondary);
 }
@@ -155,7 +165,7 @@ cursor: pointer;
   border: var(--secondary-color) 3px solid;
   background-color: var(--main-color);
   border-radius: 40px;
-  position:relative;
+  position: relative;
 }
 .modalHeading {
   display: flex;
@@ -165,7 +175,7 @@ cursor: pointer;
 }
 .difficultyHeading {
   font-style: italic;
-  color:burlywood;
+  color: burlywood;
   text-decoration: underline;
   margin-left: 30px;
 }
@@ -180,33 +190,45 @@ cursor: pointer;
 }
 .modalButton {
   width: 40px;
-  height:40px;
- 
+  height: 40px;
+
   transition: transform 0.1s linear;
 }
 .modalButton:last-child {
   margin-left: 20px;
 }
 .modalButton:hover {
-transform: scale(1.1);
-cursor: pointer;
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
-.settingsInput {
-background-color: transparent;
-color: white;
-outline: none;
-border: 2px solid var(--light-color-secondary);
-align-self: left;
-padding: 5px 10px;
-width: 150px;
+.difficultyInput {
+  background-color: transparent;
+  color: white;
+  outline: none;
+  border: 2px solid var(--light-color-secondary);
+  align-self: left;
+  padding: 5px 10px;
+  width: 150px;
 }
-.settingsInput > option {
+.difficultyInput:hover {
+  cursor: pointer;
+}
+.roundsInput {
+  background-color: transparent;
+  color: white;
+  outline: none;
+  border: 2px solid var(--light-color-secondary);
+  padding: 5px 10px;
+}
+.difficultyInput > option {
   color: black;
-  padding: 10px;
 }
-
-
+.modalButtons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
 
 /* ### Loader ### */
 
@@ -220,13 +242,112 @@ width: 150px;
 }
 
 @keyframes spin {
-  0% {transform: rotate(0deg);}
-  100% {transform: rotate(360deg);}
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 /* ### Right Panel ### */
 
+.panelRight {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+}
+.hangedManPanel {
+  height: 300px;
+  width: 350px;
+  margin: 0 auto;
+  display: flex;
+  position: relative;
+}
+.hangedManImageContainer {
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+}
+.imagePart {
+  position: absolute;
+  background-color: white;
+}
 
+.part1 {
+  width: 200px;
+  height: 4px;
+  bottom: 40px;
+  right: 40px;
+}
+.part2 {
+  height: 250px;
+  width: 4px;
 
+  bottom: 40px;
+  right: 40px;
+}
+.part3 {
+  width: 100px;
+  height: 4px;
+
+  top: 10px;
+  right: 40px;
+}
+.part4 {
+  width: 2px;
+  height: 50px;
+  top: 10px;
+  right: 140px;
+}
+.part5 {
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border:2px solid white;
+  border-radius: 50%;
+  top:60px;
+  right:125px;
+  transform: scale(1.05);
+}
+.part6 {
+  width: 2px;
+  height: 30px;
+  top: 93px;
+  right: 132px;
+  transform: rotate(-30deg);
+ 
+}
+.part7 {
+  width: 2px;
+  height: 30px;
+  top: 93px;
+  right: 148px;
+  transform: rotate(30deg);
+}
+.part8 {
+  width: 2px;
+  height: 50px;
+  top: 95px;
+  right: 140px; 
+}
+.part9 {
+  width: 2px;
+  height: 30px;
+  top: 143px;
+  right: 132px;
+  transform: rotate(-30deg);
+}
+.part10 {
+  width: 2px;
+  height: 30px;
+  top: 143px;
+  right: 148px;
+  transform: rotate(30deg);
+  
+}
+.none {
+  visibility:hidden;
+}
 /* ### Media Queries ### */
 
 @media screen and (width>800px) {
@@ -238,16 +359,35 @@ width: 150px;
     align-items: center;
     gap: 1em;
   }
-  .mainScreen {
-    margin: 10px 40px;
-    flex-direction: row;
-  }
+
   .panel {
     width: 100%;
     height: 50%;
   }
-  .panelLeft {
+  .hangedManPanel {
     height: 400px;
+    width: 100%;
+    position: relative;
+  }
+  .panelLeft,
+  .panelRight {
+    height: 400px;
+    position: relative;
+  }
+  .mainScreen {
+    flex-direction: row;
+    margin: 10px 40px;
+  }
+  .panelLeftWord {
+    font-size: 42px;
+    position: static;
+  }
+  .roundPanel {
+    position: absolute;
+    top: auto;
+    right: auto;
+    bottom: 20px;
+    left: 30px;
   }
   .keyboardKey {
     margin: 2px 2px;
@@ -255,7 +395,32 @@ width: 150px;
     height: 60px;
     font-size: 24px;
   }
-  .keyboardLine{
-    margin:0;
-   }
+  .keyboardLine {
+    margin: 0;
+  }
+
+  .part3 { 
+    top: 110px;
+  }
+  .part4 {
+    top: 110px;
+  }
+  .part5 {
+    top:160px;
+  }
+  .part6 {
+    top: 195px;
+  }
+  .part7 {
+    top: 195px;
+  }
+  .part8 {
+    top: 195px;
+  }
+  .part9 {
+    top: 243px;
+  }
+  .part10 {
+    top: 243px;
+  }
 }

@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
 import { useFetchData } from "../hooks/useFetchData";
+import { resetKeyArray } from "../store/slices/keyboard-slice";
 import { openModal } from "../store/slices/modal-slice";
 import { endTheGame, toggleGameRunning } from "../store/slices/playthrough-slice";
+import { ResetKeyboard } from "../utils/ResetKeyboard";
 import styles from "./styles.module.css";
 
 interface TopBarListProps extends React.HTMLAttributes<HTMLUListElement> {
@@ -26,7 +28,11 @@ const TopBarList: React.FunctionComponent<TopBarListProps> = (
     setIsListOpen(false);
     dispatch(useFetchData(difficulty));
   };
-
+ const EndGame =() => {
+  dispatch(resetKeyArray());
+      ResetKeyboard();
+      dispatch(endTheGame())
+ }
   useEffect(()=> {
     setIsListOpen(false);
   },[isRunning]);
@@ -56,7 +62,7 @@ const TopBarList: React.FunctionComponent<TopBarListProps> = (
       </li>
       <li
       className={!isRunning ? styles.hidden : ''}
-      onClick={() => {dispatch(endTheGame())}}>
+      onClick={() => {EndGame()}}>
         End the game
       </li>
       <li
