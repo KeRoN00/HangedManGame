@@ -16,7 +16,7 @@ import { useFetchData } from "../../hooks/useFetchData";
 const EndingScoreModal: React.FC = () => {
   const dispatch = useAppDispatch();
   const { score } = useAppSelector((state) => state.playthrough);
-  const { difficulty } = useAppSelector((state) => state.settings);
+  const { difficulty, numOfRounds } = useAppSelector((state) => state.settings);
   const EndGame = () => {
     dispatch(closeModal());
     dispatch(resetKeyArray());
@@ -35,16 +35,24 @@ const EndingScoreModal: React.FC = () => {
   return (
     <div className={styles.modalContainer}>
       <div className={styles.modalHeading}>
-        <h1>{score == 0 ? "Better luck next time" : "Good job!"}</h1>
-        <div className={styles.modalButtons}>
-          <CgClose className={styles.modalButton} onClick={() => EndGame()} />
-        </div>
+        <h1>
+          {score < numOfRounds / 2 ? "Better luck next time" : "Good job!"}
+        </h1>
       </div>
       <div className={styles.modalContent}>
-        Modal Content for Settings
-        <button className={styles.modalButton} onClick={() => playAgain()}>
-          Play again
-        </button>
+        <div className={styles.scoreDetails}>
+          <h1>Your score:</h1>
+          <h2>{score} / {numOfRounds}</h2>
+        </div>
+        <div className={styles.bottomButtons}>
+          <button
+            className={styles.playAgainButton}
+            onClick={() => playAgain()}
+          >
+            Play again
+          </button>
+          <CgClose className={styles.modalButton} onClick={() => EndGame()} />
+        </div>
       </div>
     </div>
   );

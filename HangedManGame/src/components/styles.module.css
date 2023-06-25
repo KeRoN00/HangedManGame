@@ -76,9 +76,9 @@
 .mainScreen {
   margin: 10px;
   flex-direction: column;
-  border-radius: 40px;
+  border-radius: 20px;
   display: flex;
-  border: 2px solid var(--secondary-color);
+  border: 1px solid var(--secondary-color);
   min-height: 400px;
   height: 100%;
 }
@@ -170,7 +170,7 @@
 .modalHeading {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding-inline: 20px;
 }
 .difficultyHeading {
@@ -179,19 +179,21 @@
   text-decoration: underline;
   margin-left: 30px;
 }
+.bottomButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .modalContent {
   padding: 0 30px;
   display: flex;
-  align-items: flex-start;
+  align-items:center;
   flex-direction: column;
-  text-align: left;
   height: 80%;
-  overflow-y: auto;
 }
 .modalButton {
   width: 40px;
   height: 40px;
-
   transition: transform 0.1s linear;
 }
 .modalButton:last-child {
@@ -201,7 +203,25 @@
   transform: scale(1.1);
   cursor: pointer;
 }
-
+.scoreDetails {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.playAgainButton {
+  background-color: var(--light-color-secondary);
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  padding:10px 25px;
+  color:white;
+}
+.playAgainButton:hover {
+  background-color: var(--light-color);
+  cursor: pointer;
+}
 .difficultyInput {
   background-color: transparent;
   color: white;
