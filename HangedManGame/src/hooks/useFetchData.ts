@@ -1,15 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const API_KEY: string = import.meta.env.VITE_API_KEY;
-const HOST: string = import.meta.env.VITE_APP_API_HOST;
 
-const options = {
-  method: "GET",
-  headers: {
-    "X-RapidAPI-Key": API_KEY,
-    "X-RapidAPI-Host": HOST,
-  },
-};
+
 
 export const useFetchData = createAsyncThunk(
   "playthrough/fetch",
@@ -30,12 +22,11 @@ export const useFetchData = createAsyncThunk(
     }
     try {
       const response = await fetch(
-        `https://${HOST}/L/${wordLength}`,
-        options
+        `https://random-word-api.herokuapp.com/word?length=${wordLength}`
       );
       const res = await response.json();
-      console.log("Fetched data", res.word);
-      return res.word;
+      console.log("Fetched data", res[0]);
+      return res[0];
     } catch (error) {
       return error;
     }

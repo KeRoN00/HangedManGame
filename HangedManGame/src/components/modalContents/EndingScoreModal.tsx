@@ -9,13 +9,14 @@ import {
   endTheGame,
   toggleGameRunning,
 } from "../../store/slices/playthrough-slice";
+import { useFetchData } from "../../hooks/useFetchData";
 
 // TODO: Style this component with displayed score
 
 const EndingScoreModal: React.FC = () => {
   const dispatch = useAppDispatch();
   const { score } = useAppSelector((state) => state.playthrough);
-
+  const { difficulty } = useAppSelector((state) => state.settings);
   const EndGame = () => {
     dispatch(closeModal());
     dispatch(resetKeyArray());
@@ -27,6 +28,7 @@ const EndingScoreModal: React.FC = () => {
     dispatch(resetKeyArray());
     ResetKeyboard();
     dispatch(endTheGame());
+    dispatch(useFetchData(difficulty));
     dispatch(toggleGameRunning(true));
   };
 
